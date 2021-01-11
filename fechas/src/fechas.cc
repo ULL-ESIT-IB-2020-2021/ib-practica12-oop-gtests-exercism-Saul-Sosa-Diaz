@@ -6,7 +6,7 @@
  *
  * @author Saúl Sosa
  * @date 3.enero.2021
- * @brief Organizador de fechas desde un archivo
+ * @brief Organizador de fechas desde un fichero de texto en orden ascendente en otro fichero
  */
 
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
   if(argc == 1){ argv[1] = "NO_ERROR";} //Error no hay argv[1]
     today.Usage(argc,argv[1]);
     
-   
+  //Asignación ficheros 
   std::ifstream archivoEntrada;
   std::ofstream archivoSalida; 
   
