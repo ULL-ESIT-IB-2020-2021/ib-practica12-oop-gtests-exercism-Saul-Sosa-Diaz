@@ -6,49 +6,90 @@
  *
  * @author Saúl Sosa
  * @date 3.enero.2021
- * @brief Fichero donde estan definidas las funciones utilizadas en el programa
+ * @brief Fichero donde estan las implementaciones de los métodos de la clase Complejo, y las funciones usadas en el programa
  */
 
 #include "complejo.h"
 #include <string>
 
 
-//Sobrecarga de operadores
-//-----------------------------------------------------------------------------------------------------------
-
+/** Sobrecarga del operador + 
+ *  @param[in] complejo1 objeto de la clase Complejo
+ *  @param[in] complejo2 objeto de la clase Complejo
+ *  @return El resultado de sumar dos números complejos
+ */
 Complejo operator+(const Complejo &complejo1, const Complejo &complejo2){
   Complejo result(complejo1.real_+complejo2.real_, complejo1.imaginario_+complejo2.imaginario_);
-return result;
+  return result;
 }
 
+/** Sobrecarga del operador - 
+ *  @param[in] complejo1 objeto de la clase Complejo
+ *  @param[in] complejo2 objeto de la clase Complejo
+ *  @return El resultado de restar dos números complejos
+ */
 Complejo operator-(const Complejo &complejo1, const Complejo &complejo2){
   Complejo result(complejo1.real_-complejo2.real_, complejo1.imaginario_-complejo2.imaginario_);
-return result;
+  return result;
 }
 
+/** Sobrecarga del operador * 
+ *  @param[in] complejo1 objeto de la clase Complejo
+ *  @param[in] complejo2 objeto de la clase Complejo
+ *  @return El resultado de multiplicar dos números complejos
+ */
 Complejo operator*(const Complejo &complejo1, const Complejo &complejo2){
   Complejo result((complejo1.real_*complejo2.real_)-(complejo1.imaginario_*complejo2.imaginario_), (complejo1.real_*complejo2.imaginario_)+(complejo1.imaginario_*complejo2.real_));
-return result;
+  return result;
 }
 
+/** Sobrecarga del operador << en consola
+ *  @param[in] std::ostream flujo
+ *  @param[in] complejo objeto de la clase Complejo
+ *  @return Un flujo de salida a la consola
+ */
 std::ostream& operator<<(std::ostream &out, const Complejo &complejo){
   if(complejo.imaginario_ < 0){
     out << complejo.real_ << complejo.imaginario_ <<"i";  
   }else{
     out << complejo.real_ << "+" <<complejo.imaginario_ <<"i";
   }
-return out;
-}
-//--------------------------------------------------------------------------------------------------------
-//Funciones
-
-void Usage(char* palabra){ //Modo de uso
-  std::string ayuda = "--help";
-     if(palabra == ayuda){ //Información programa
-      std::cout << "El programa mostrará por pantalla una serie de operaciones con numeros complejos. " << std::endl;
-      exit(1);
-     }
-    std::cout << std::endl <<"./complejos.out - Calculador complejos" << std::endl << "Modo de uso: ./complejos.out" << std::endl <<
-    "Pruebe ./complejos.out --help para más información"<< std::endl << std::endl << std::endl;    
+  return out;
 }
 
+/** Sobrecarga del operador ==
+ *  @param[in] complejo1 objeto de la clase Complejo
+ *  @param[in] complejo2 objeto de la clase Complejo
+ *  @return El resultado de comparar dos números complejos 
+ */
+bool operator==(const Complejo &complejo1, const Complejo &complejo2){
+  bool result = false;
+  if(complejo1.real_ == complejo2.real_ && complejo1.imaginario_ == complejo2.imaginario_){
+    result = true;
+  }
+  return result;
+}
+
+/** Muestra el modo de uso correcto del programa
+ *  En caso de que el uso no sea el correcto, muestra el mensaje y finaliza
+ *  la ejecución del programa.
+ *  El programa precisa un único número natural para su ejecución.
+ *
+ *  @param[in] argc Number of command line parameters
+ *  @param[in] argv Vector containing (char*) the parameters
+ */
+void Usage(int argc, char* argv[]){ 
+  if(argc != 1){
+    if(argc == 2){
+      std::string parameter{argv[1]};
+      if(parameter == "--help"){ 
+        std::cout << "El programa imprimirá en pantalla una serie de operaciones con números complejos, si quiere modificarlos\n" 
+        << "tendrá que hacerlo desde el código fuente. " << std::endl;
+        exit(EXIT_SUCCESS);
+      }
+    }
+    std::cout << "./user_program.out - Calculadora de números complejos" << std::endl << "Modo de uso: ./user_program.out" << std::endl <<
+    "Pruebe ./user_program.out --help para más información"<< std::endl;
+    exit(EXIT_SUCCESS);
+  }
+}
