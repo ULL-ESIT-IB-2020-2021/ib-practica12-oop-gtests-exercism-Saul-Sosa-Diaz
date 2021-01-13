@@ -12,17 +12,18 @@
 
 #include "fecha.h"
 
+/** Main function
+ *  @param[in] argc Number of command line parameters
+ *  @param[in] argv Vector containing (char*) the parameters
+ */
 int main(int argc, char* argv[]){
-  
-  int dia, mes, ano;
+  //Declaración de variables  
+  int dia, mes, anio;
   char slash1, slash2;
   std::vector<Fecha> fechasDesordenadas;
+  Fecha hoy;
   
-  Fecha today{};
-
-
-  if(argc == 1){ argv[1] = "NO_ERROR";} //Error no hay argv[1]
-    today.Usage(argc,argv[1]);
+  Usage(argc, argv);
     
   //Asignación ficheros 
   std::ifstream archivoEntrada;
@@ -38,20 +39,20 @@ int main(int argc, char* argv[]){
     std::cout<< "No se puede abrir el archivo" << std::endl;
     exit(1);
   }
-
-  while(archivoEntrada >> dia >> slash1 >> mes >> slash2 >> ano){ //Asignación variables desde el fichero.
-    Fecha fechaAgregar(dia,mes,ano);
+  std::cout << "Se ha leído el archivo" << std::endl;
+  while(archivoEntrada >> dia >> slash1 >> mes >> slash2 >> anio){ //Asignación variables desde el fichero.
+    Fecha fechaAgregar{dia, mes, anio};
     fechasDesordenadas.push_back(fechaAgregar);
   }
-
-
+  
   std::sort(fechasDesordenadas.begin(), fechasDesordenadas.end()); // ordenar las fechas
-   for (const auto &i: fechasDesordenadas)
-      archivoSalida << i << ' ' <<std::endl;
+  for(const auto& i: fechasDesordenadas){
+    archivoSalida << i << ' ' <<std::endl;
+  } 
+  std::cout << "Se han ordenado las fechas y han sido guardadas en el fichero: " << nombreArchivoSalida << std::endl << std::endl;
+  std::cout << hoy << " " << IsBisiesto(hoy) << " es bisiesto." << std::endl;
   
-  std::cout << today << " " << IsBisiesto(today) << " es bisiesto." << std::endl;
-  
-  
+  //Cerrar los archivos
   archivoEntrada.close();
   archivoSalida.close();
 return 0;
