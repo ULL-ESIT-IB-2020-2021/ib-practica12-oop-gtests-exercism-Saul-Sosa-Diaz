@@ -10,3 +10,9 @@ TEST(testOperadorMenos, casoComun) {
         EXPECT_EQ(complejo3, complejo1 - complejo2);
 }
 
+TEST(testOperadorMenos, casoExtremo) {
+        Complejo complejo1(0,0);
+        Complejo complejo2(0,0);
+        Complejo complejo3(0,0);
+        EXPECT_EQ(complejo3, complejo1 - complejo2);
+}
