@@ -8,8 +8,11 @@
  * @date 3.enero.2021
  * @brief 
  */
-#include "fecha.h"
 #include <string>
+#include <cstdlib>
+
+#include "fecha.h"
+
 
 /** Sobrecarga del operador << en consola
  *  @param[in] std::ostream flow
@@ -80,16 +83,19 @@ return result;
  *  @param[in] argc Number of command line parameters
  *  @param[in] argv Vector containing (char*) the parameters
  */
-void Usage(int argc, char* palabra[]){ 
-  std::string ayuda = "--help";
+void Usage(int argc, char* argv[]){ 
   if(argc != 3){
-     if(palabra[1] == ayuda){ 
-      std::cout << "El programa deberá imprimir en el fichero de salida todas las fechas que se encuentran en el fichero de entrada pero escritas en orden ascendente cronológicamente. " << std::endl;
-      exit(1);
+    if(argc == 2){
+      std::string parameter{argv[1]};
+      if(parameter == "--help"){ 
+        std::cout << "El programa deberá imprimir en el fichero de salida todas las fechas que se encuentran en el fichero de entrada,\n" 
+        << "pero escritas en orden ascendente cronológicamente. " << std::endl;
+        exit(EXIT_SUCCESS);
+      }
     }
-    std::cout << "./fechas.out - Gestión de fechas" << std::endl << "Modo de uso: ./fechas fichero_entrada.txt fichero_salida.txtt" << std::endl <<
-    "Pruebe ./fechas.out --help para más información"<< std::endl;
-    exit(1);
+    std::cout << "./user_program.out - Gestión de fechas" << std::endl << "Modo de uso: ./fechas fichero_entrada.txt fichero_salida.txtt" << std::endl <<
+    "Pruebe ./user_program.out --help para más información"<< std::endl;
+    exit(EXIT_SUCCESS);
   }
 }
 

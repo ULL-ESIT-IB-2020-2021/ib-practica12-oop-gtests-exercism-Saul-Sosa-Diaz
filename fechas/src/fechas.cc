@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
   std::vector<Fecha> fechasDesordenadas;
   Fecha hoy;
   
-  Usage(argc, argv);
+  Usage(argc, argv); //Muestra modo de uso del programa
     
   //Asignación ficheros 
   std::ifstream archivoEntrada;

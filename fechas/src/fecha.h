@@ -36,7 +36,7 @@ class Fecha{
   int GetMonth() {return month_;};
   int GetYear() {return year_;};
   //Funciones
-  friend std::string IsBisiesto(Fecha);
+  friend std::string IsBisiesto(Fecha); //Calcula si un año es bisiesto
   //Sobrecargas de operadores 
   friend std::ostream& operator<<(std::ostream &out, const Fecha &fecha);
   friend bool operator<(const Fecha &fecha1, const Fecha &fecha2);
@@ -45,7 +45,7 @@ class Fecha{
  
  private:  //Atributos
   int day_{10}, month_{1}, year_{2021};
-  };
+};
 
 void Usage(int argc, char* argv[]);
 
